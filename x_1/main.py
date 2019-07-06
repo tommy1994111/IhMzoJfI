@@ -1,5 +1,6 @@
 from abc import ABCMeta, abstractmethod
 from typing import List
+from math import factorial
 
 class SmartPhoneStrategyAbstract(object, metaclass=ABCMeta):
     def __init__(self, price: int, camera_count: int, screen_size: int):
@@ -69,8 +70,7 @@ class ApplePhoneStrategy(SmartPhoneStrategyAbstract):
         
         例如: 輸入(x=5, y=3)  回傳 60
         '''
-        pass
-
+        return int(factorial(x) / factorial(x - y))
 
 if __name__ == "__main__":
     googlePhone = GooglePhoneStrategy()
@@ -78,3 +78,4 @@ if __name__ == "__main__":
     taiwanPhone = TaiwanPhoneStrategy()
     print(taiwanPhone.special_feature(33) == 3524578)
     applePhone = ApplePhoneStrategy()
+    print(applePhone.special_feature(x=5, y=3) == 60)
