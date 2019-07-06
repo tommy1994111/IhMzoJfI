@@ -38,13 +38,24 @@ class TaiwanPhoneStrategy(SmartPhoneStrategyAbstract):
         camera_count = 1
         screen_size = 3
         super().__init__(price, camera_count, screen_size)
+
+    @staticmethod
+    def __FibonacciGenerator() -> int:
+        a, b = 0, 1
+        while True:
+            yield a
+            a, b = b, a + b
     
     def special_feature(self, inputInt: int) -> int:
         '''輸入一個數字自動回傳 Fibonacci 斐波那契數列的運算結果
 
         例如: 輸入 33 回傳 3524578
         '''
-        pass
+        generator = TaiwanPhoneStrategy.__FibonacciGenerator()
+        output = None
+        for _ in range(inputInt + 1):
+            output = next(generator)
+        return output
 
 class ApplePhoneStrategy(SmartPhoneStrategyAbstract):
     def __init__(self):
@@ -65,4 +76,5 @@ if __name__ == "__main__":
     googlePhone = GooglePhoneStrategy()
     print(googlePhone.special_feature([3, 43, 62, 15, 18, 22]) == [62, 22, 18])
     taiwanPhone = TaiwanPhoneStrategy()
+    print(taiwanPhone.special_feature(33) == 3524578)
     applePhone = ApplePhoneStrategy()
