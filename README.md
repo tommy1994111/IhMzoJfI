@@ -25,9 +25,13 @@ special_freature 輸入一個int list, 回傳偶數且大於10的元素，並由
 
 手機二 taiwan phone:
 price=20, camera_count=1, screen_size=3
-special_freature
-輸入一個數字自動計算Fibonacci斐波那契數列的運算結果，並取最後二位(十位為 x、個位為 y)數字進行 p x 取 y (排序組合) 計算。
-例如: ---
+special_freature 輸入一個數字自動回傳Fibonacci斐波那契數列的運算結果
+例如: 輸入 33 回傳 3524578
+
+手機三 apple phone:
+price=30, camera_count=2, screen_size=10
+special_freature 輸入2個數字自動運算 p x 取 y 
+例如: 輸入(x=5, y=3)  回傳 60
 
 ```
 
