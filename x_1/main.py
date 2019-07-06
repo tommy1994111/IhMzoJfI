@@ -20,12 +20,17 @@ class GooglePhoneStrategy(SmartPhoneStrategyAbstract):
         screen_size = 5
         super().__init__(price, camera_count, screen_size)
     
+    @staticmethod
+    def __filter(num: int) -> int:
+        '''篩選偶數且大於 10 的元素'''
+        return (num % 2 == 0) and (num > 10)
+    
     def special_feature(self, inputList: List[int]) -> List[int]:
         '''輸入一個 int list, 回傳偶數且大於 10 的元素，並由大至小進行排序
         
         例如: 輸入 [3, 43, 62, 15, 18, 22] 回傳 [62, 22, 18]
         '''
-        pass
+        return sorted(filter(GooglePhoneStrategy.__filter, inputList), key=int, reverse=True)
 
 class TaiwanPhoneStrategy(SmartPhoneStrategyAbstract):
     def __init__(self):
@@ -58,5 +63,6 @@ class ApplePhoneStrategy(SmartPhoneStrategyAbstract):
 
 if __name__ == "__main__":
     googlePhone = GooglePhoneStrategy()
+    print(googlePhone.special_feature([3, 43, 62, 15, 18, 22]) == [62, 22, 18])
     taiwanPhone = TaiwanPhoneStrategy()
     applePhone = ApplePhoneStrategy()
