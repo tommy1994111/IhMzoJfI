@@ -3,6 +3,11 @@ from typing import List
 from math import factorial
 
 class SmartPhoneStrategyAbstract(object, metaclass=ABCMeta):
+    '''智慧型手機抽象類別
+
+    參考 Strategy pattern 實作類似 interface 的抽象類別
+    '''
+    
     def __init__(self, price: int, camera_count: int, screen_size: int):
         self.price = price
         self.camera_count = camera_count
@@ -42,6 +47,7 @@ class TaiwanPhoneStrategy(SmartPhoneStrategyAbstract):
 
     @staticmethod
     def __FibonacciGenerator() -> int:
+        '''斐波那契數列生成器'''
         a, b = 0, 1
         while True:
             yield a
