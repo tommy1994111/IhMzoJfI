@@ -48,7 +48,7 @@ class TaiwanPhoneStrategy(SmartPhoneStrategyAbstract):
     @staticmethod
     def __FibonacciGenerator() -> int:
         '''斐波那契數列生成器'''
-        a, b = 0, 1
+        a, b = 1, 1
         while True:
             yield a
             a, b = b, a + b
@@ -60,7 +60,7 @@ class TaiwanPhoneStrategy(SmartPhoneStrategyAbstract):
         '''
         generator = TaiwanPhoneStrategy.__FibonacciGenerator()
         output = None
-        for _ in range(inputInt + 1):
+        for _ in range(inputInt):
             output = next(generator)
         return output
 
