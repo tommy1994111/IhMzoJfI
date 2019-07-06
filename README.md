@@ -16,27 +16,27 @@ Hi,
 
 ```
 手機共通屬性: price, camera_count, screen_size
-特殊功能: special_freature() 
+特殊功能: special_feature() 
 
 手機一 google phone:
 price=10, camera_count=3, screen_size=5
-special_freature 輸入一個int list, 回傳偶數且大於10的元素，並由大至小進行排序
+special_feature 輸入一個int list, 回傳偶數且大於10的元素，並由大至小進行排序
 例如: 輸入 [3, 43, 62, 15, 18, 22] 回傳 [62, 22, 18]
 
 手機二 taiwan phone:
 price=20, camera_count=1, screen_size=3
-special_freature 輸入一個數字自動回傳Fibonacci斐波那契數列的運算結果
+special_feature 輸入一個數字自動回傳Fibonacci斐波那契數列的運算結果
 例如: 輸入 33 回傳 3524578
 
 手機三 apple phone:
 price=30, camera_count=2, screen_size=10
-special_freature 輸入2個數字自動運算 p x 取 y 
+special_feature 輸入2個數字自動運算 p x 取 y 
 例如: 輸入(x=5, y=3)  回傳 60
 
 ```
 
 
-### 挑戰二: pip 及 Django 實作  (folder: x_3)
+### 挑戰二: pip 及 Django 實作  (folder: x_2)
 
 > 請參考 https://github.com/twtrubiks/django-tutorial 的教學，將您的Django 運行起來，並進行以下步驟:
 
