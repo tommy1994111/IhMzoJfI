@@ -60,7 +60,7 @@ class CsvHanlder(object):
 
     def detect_folder(self):
         '''偵測相同目錄下是否存在一個 ilovecoffee 資料夾，若無則建立，有則略過'''
-        pass
+        os.makedirs(FOLDER_PATH, exist_ok=True)
     
     def create_csv(self):
         '''隨機寫入 500 筆客戶資料至 /ilovecoffee/customers.csv'''
