@@ -1,5 +1,7 @@
 import os
 from typing import List
+from random import sample, choices
+from string import ascii_letters, digits
 
 FOLDER_PATH = os.path.join('.', 'ilovecoffee')
 CSV_PATH = os.path.join(FOLDER_PATH, 'customers.csv')
@@ -26,7 +28,16 @@ class CustomerGenerator(object):
         
         長度8, 由數字[0-9], 大寫[A-Z]，小寫[a-z]隨機組成，但開頭不可為數字
         '''
-        pass
+        
+        customerIds = []
+        
+        for _ in range(amount):
+            firstLetter = sample(ascii_letters, 1)
+            otherLetters = sample(ascii_letters + digits, 7)
+            customerId = ''.join(firstLetter + otherLetters)
+            customerIds.append(customerId)
+        
+        return customerIds
 
     def generateNames(self, id_list: List[str]) -> List[str]:
         '''產生 customer_name
@@ -34,25 +45,41 @@ class CustomerGenerator(object):
         隨意用10個英文名字建立一組list: 如 ['tom','peter','hank'....]
         將customer_id與隨機從 name list 中取出的一個元素進行合併，例如產出"tom.y88xTa"
         '''
-        pass
+        
+        customerNames = []
+
+        for customerId in id_list:
+            prefix = sample(self.CUSTOMER_NAME_PREFIX, 1).pop()
+            customerNames.append('.'.join([prefix, customerId]))
+        
+        return customerNames
 
     def generateMobiles(self, amount: int) -> List[str]:
         '''產生 customer_mobile
         
         隨機產生一個+886開頭的台灣電話號碼，若新產出的電話號碼有重複，則需要重新產生
         '''
-        pass
+        
+        postfixs = sample(range(10 ** 8), amount)
+        customerMobiles = map(lambda postfix: f"{self.CUSTOMER_MOBILE_PREFIX}{postfix:08d}", postfixs)
+        return customerMobiles
 
     def generateFrequencies(self, amount: int) -> List[int]:
         '''產生 frequency
         
         從 [0-20] 中隨機進行選擇
         '''
-        pass
+
+        return choices(range(21), k=amount)
 
     def generateCustomers(self, amount):
         '''產生客戶資料'''
-        pass
+
+        customerIds = self.generateIds(amount)
+        customerNames = self.generateNames(customerIds)
+        customerMobiles = self.generateMobiles(amount)
+        frequencies = self.generateFrequencies(amount)
+        return zip(customerIds, customerNames, customerMobiles, frequencies)
 
 class CsvHanlder(object):
     def __init__(self):
@@ -71,6 +98,9 @@ class CsvHanlder(object):
         pass
 
 if __name__ == "__main__":
+    generator = CustomerGenerator()
+    # print(list(generator.generateCustomers(500)))
+
     handler = CsvHanlder()
     handler.create_csv()
     handler.calculate_csv()
