@@ -3,6 +3,8 @@ import csv
 from typing import List
 from random import sample, choices
 from string import ascii_letters, digits
+from statistics import median, mode, mean, StatisticsError
+from collections import Counter
 
 FOLDER_PATH = os.path.join('.', 'ilovecoffee')
 CSV_PATH = os.path.join(FOLDER_PATH, 'customers.csv')
@@ -110,8 +112,26 @@ class CsvHanlder(object):
 
 
     def calculate_csv(self):
-        '''讀取 /ilovecoffee/customers.csv，並列印出frequency 的中數、眾數及平均數 (取至小數點後 5 位)'''
-        pass
+        '''讀取 /ilovecoffee/customers.csv，並列印出 frequency 的中數、眾數及平均數 (取至小數點後 5 位)'''
+
+        frequencies = []
+        with open(CSV_PATH, 'r') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                frequencies.append(int(row['frequency']))
+        
+        print(f'中數: {median(frequencies)}')
+        
+        try:
+            print(f'眾數: {mode(frequencies)}')
+        except StatisticsError:
+            # statistics.mode 如果有多個眾數，會回傳 StatisticsError
+            count = dict(Counter(frequencies))
+            maxAmount = max(count.values())
+            modes = ', '.join([str(key) for key, value in count.items() if value == maxAmount])
+            print(f'眾數: {modes}')
+        
+        print(f'平均數: {format(mean(frequencies), ".5f")}')
 
 if __name__ == "__main__":
     # generator = CustomerGenerator()
