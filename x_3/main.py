@@ -1,4 +1,5 @@
 import os
+import csv
 from typing import List
 from random import sample, choices
 from string import ascii_letters, digits
@@ -91,14 +92,29 @@ class CsvHanlder(object):
     
     def create_csv(self):
         '''隨機寫入 500 筆客戶資料至 /ilovecoffee/customers.csv'''
-        pass
+        generator = CustomerGenerator()
+        customers = generator.generateCustomers(500)
+
+        with open(CSV_PATH, 'w', newline='', encoding='utf8') as file:
+            fieldnames = ['customer_id', 'customer_name', 'customer_mobile', 'frequency']
+            writer = csv.DictWriter(file, delimiter=',', quoting=csv.QUOTE_ALL, fieldnames=fieldnames)
+            writer.writeheader()
+            for customer_id, customer_name, customer_mobile, frequency in customers:
+                row = {
+                    'customer_id': customer_id,
+                    'customer_name': customer_name,
+                    'customer_mobile': customer_mobile,
+                    'frequency': frequency
+                }
+                writer.writerow(row)
+
 
     def calculate_csv(self):
         '''讀取 /ilovecoffee/customers.csv，並列印出frequency 的中數、眾數及平均數 (取至小數點後 5 位)'''
         pass
 
 if __name__ == "__main__":
-    generator = CustomerGenerator()
+    # generator = CustomerGenerator()
     # print(list(generator.generateCustomers(500)))
 
     handler = CsvHanlder()
